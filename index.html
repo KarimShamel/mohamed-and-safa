@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohamed & Safa | Engagement Invitation</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Background Network Canvas -->
+    <canvas id="networkCanvas"></canvas>
+
+    <!-- Music -->
+    <audio id="bgMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Opening Invitation Envelope -->
+    <div id="envelopeScreen">
+        <div class="envelope-wrapper">
+            <div class="envelope" id="openInvitation">
+                <div class="envelope-front"></div>
+                <div class="envelope-flap"></div>
+
+                <div class="letter">
+                    <h2>You're Invited</h2>
+                    <p>Tap to Open</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+
+            <div class="engineering-badge">
+                <i class="fa-solid fa-satellite-dish"></i>
+                Communications Engineers
+            </div>
+
+            <h1>Mohamed <span>&</span> Safa</h1>
+
+            <p class="hero-subtitle">
+                Together from the halls of Aleppo University's College of Communications Engineering
+                to a lifetime of love.
+            </p>
+
+            <div class="countdown">
+
+                <div class="time-box">
+                    <span id="days">00</span>
+                    <small>Days</small>
+                </div>
+
+                <div class="time-box">
+                    <span id="hours">00</span>
+                    <small>Hours</small>
+                </div>
+
+                <div class="time-box">
+                    <span id="minutes">00</span>
+                    <small>Minutes</small>
+                </div>
+
+                <div class="time-box">
+                    <span id="seconds">00</span>
+                    <small>Seconds</small>
+                </div>
+
+            </div>
+
+            <div class="event-date">
+                Engagement Celebration • 30 June 2026
+            </div>
+
+        </div>
+
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <i class="fa-solid fa-angle-down"></i>
+        </div>
+    </header>
+
+    <!-- Story Section -->
+    <section class="story fade-section">
+
+        <div class="section-title">
+            <span>Our Journey</span>
+            <h2>How We Met</h2>
+        </div>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-content">
+                    <h3>The Beginning</h3>
+                    <p>
+                        Mohamed and Safa first met at the University of Aleppo,
+                        College of Communications Engineering.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-content">
+                    <h3>Shared Passion</h3>
+                    <p>
+                        Long study sessions, engineering projects,
+                        communication systems, and countless dreams
+                        brought them closer together.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-content">
+                    <h3>A Strong Connection</h3>
+                    <p>
+                        What started as friendship evolved into a beautiful
+                        relationship built on trust, ambition, and love.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-content">
+                    <h3>Forever Begins</h3>
+                    <p>
+                        Now they invite you to celebrate the next chapter
+                        of their journey together.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery fade-section">
+
+        <div class="section-title">
+            <span>Memories</span>
+            <h2>Gallery</h2>
+        </div>
+
+        <div class="gallery-grid">
+
+            <div class="gallery-item">
+                <img src="couple-1.jpg" alt="Mohamed and Safa">
+            </div>
+
+            <div class="gallery-item">
+                <img src="couple-2.jpg" alt="Mohamed and Safa">
+            </div>
+
+            <div class="gallery-item">
+                <img src="aleppo-university.jpg" alt="Aleppo University">
+            </div>
+
+            <div class="gallery-item">
+                <img src="engagement-plate.jpg" alt="Engagement Plate">
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Event Details -->
+    <section class="details fade-section">
+
+        <div class="section-title">
+            <span>Celebration</span>
+            <h2>Event Details</h2>
+        </div>
+
+        <div class="details-grid">
+
+            <div class="detail-card">
+                <i class="fa-solid fa-calendar-days"></i>
+                <h3>Date</h3>
+                <p>30 June 2026</p>
+            </div>
+
+            <div class="detail-card">
+                <i class="fa-solid fa-clock"></i>
+                <h3>Time</h3>
+                <p>7:00 PM</p>
+            </div>
+
+            <div class="detail-card">
+                <i class="fa-solid fa-heart"></i>
+                <h3>Occasion</h3>
+                <p>Engagement Party</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- RSVP -->
+    <section class="rsvp fade-section">
+
+        <div class="section-title">
+            <span>RSVP</span>
+            <h2>Will You Celebrate With Us?</h2>
+        </div>
+
+        <form id="rsvpForm">
+
+            <input type="text" placeholder="Full Name" required>
+
+            <input type="email" placeholder="Email Address" required>
+
+            <select required>
+                <option value="">Will you attend?</option>
+                <option>Joyfully Accept</option>
+                <option>Regretfully Decline</option>
+            </select>
+
+            <textarea placeholder="Message for Mohamed & Safa"></textarea>
+
+            <button type="submit">
+                Send RSVP
+            </button>
+
+        </form>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <h3>Mohamed & Safa</h3>
+        <p>Two hearts. One connection. Forever linked.</p>
+    </footer>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+
+        <div class="modal-content">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            <h2>Thank You!</h2>
+
+            <p>Your RSVP has been received successfully.</p>
+
+            <button id="closeModal">Close</button>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
