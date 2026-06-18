@@ -1,35 +1,47 @@
-/* ==========================
-   ENVELOPE OPENING
-========================== */
+/* =========================================
+   MOHAMED & SAFA ENGAGEMENT WEBSITE
+   script.js
+========================================= */
 
-const envelope = document.getElementById("openInvitation");
-const envelopeScreen = document.getElementById("envelopeScreen");
+/* =========================================
+   OPENING CURTAINS + MUSIC
+========================================= */
+
+const curtainContainer = document.getElementById("curtainContainer");
 const music = document.getElementById("bgMusic");
 
-envelope.addEventListener("click", () => {
+if (curtainContainer) {
 
-    envelope.classList.add("open");
+    curtainContainer.addEventListener("click", () => {
 
-    setTimeout(() => {
-
-        envelopeScreen.style.opacity = "0";
+        curtainContainer.classList.add("curtain-open");
 
         setTimeout(() => {
-            envelopeScreen.style.display = "none";
 
-            music.play().catch(() => {
-                console.log("Autoplay blocked until user interaction.");
-            });
+            curtainContainer.style.opacity = "0";
+            curtainContainer.style.transition = "1s";
 
-        }, 1000);
+            setTimeout(() => {
 
-    }, 1000);
+                curtainContainer.style.display = "none";
 
-});
+                if (music) {
+                    music.play().catch(() => {
+                        console.log("Autoplay blocked by browser.");
+                    });
+                }
 
-/* ==========================
-   COUNTDOWN
-========================== */
+            }, 1000);
+
+        }, 1500);
+
+    });
+
+}
+
+/* =========================================
+   COUNTDOWN TIMER
+========================================= */
 
 const targetDate = new Date("June 30, 2026 19:00:00").getTime();
 
@@ -38,137 +50,271 @@ function updateCountdown() {
     const now = new Date().getTime();
     const distance = targetDate - now;
 
-    document.getElementById("days").innerText =
-        Math.floor(distance / (1000 * 60 * 60 * 24));
+    if (distance <= 0) {
 
-    document.getElementById("hours").innerText =
-        Math.floor((distance % (1000 * 60 * 60 * 24))
-        / (1000 * 60 * 60));
+        document.getElementById("days").textContent = "00";
+        document.getElementById("hours").textContent = "00";
+        document.getElementById("minutes").textContent = "00";
+        document.getElementById("seconds").textContent = "00";
 
-    document.getElementById("minutes").innerText =
-        Math.floor((distance % (1000 * 60 * 60))
-        / (1000 * 60));
+        return;
+    }
 
-    document.getElementById("seconds").innerText =
-        Math.floor((distance % (1000 * 60)) / 1000);
+    const days = Math.floor(
+        distance / (1000 * 60 * 60 * 24)
+    );
 
+    const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24))
+        / (1000 * 60 * 60)
+    );
+
+    const minutes = Math.floor(
+        (distance % (1000 * 60 * 60))
+        / (1000 * 60)
+    );
+
+    const seconds = Math.floor(
+        (distance % (1000 * 60))
+        / 1000
+    );
+
+    document.getElementById("days").textContent =
+        String(days).padStart(2, "0");
+
+    document.getElementById("hours").textContent =
+        String(hours).padStart(2, "0");
+
+    document.getElementById("minutes").textContent =
+        String(minutes).padStart(2, "0");
+
+    document.getElementById("seconds").textContent =
+        String(seconds).padStart(2, "0");
 }
 
-setInterval(updateCountdown, 1000);
 updateCountdown();
+setInterval(updateCountdown, 1000);
 
-/* ==========================
-   SCROLL ANIMATIONS
-========================== */
+/* =========================================
+   SCROLL REVEAL ANIMATIONS
+========================================= */
 
-const sections = document.querySelectorAll(".fade-section");
+const fadeElements = document.querySelectorAll(".fade-section");
 
-const observer = new IntersectionObserver(entries => {
+const observer = new IntersectionObserver(
 
-    entries.forEach(entry => {
+    (entries) => {
 
-        if(entry.isIntersecting){
-            entry.target.classList.add("show");
-        }
+        entries.forEach(entry => {
 
-    });
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show");
+            }
 
-}, { threshold: 0.15 });
+        });
 
-sections.forEach(section => observer.observe(section));
+    },
 
-/* ==========================
-   RSVP FORM
-========================== */
+    {
+        threshold: 0.15
+    }
 
-const form = document.getElementById("rsvpForm");
-const modal = document.getElementById("successModal");
-const closeModal = document.getElementById("closeModal");
+);
 
-form.addEventListener("submit", (e) => {
-
-    e.preventDefault();
-
-    modal.style.display = "flex";
-
-    form.reset();
-
+fadeElements.forEach(element => {
+    observer.observe(element);
 });
 
-closeModal.addEventListener("click", () => {
-    modal.style.display = "none";
-});
-
-/* ==========================
-   COMMUNICATION NETWORK
-========================== */
+/* =========================================
+   COMMUNICATIONS NETWORK BACKGROUND
+========================================= */
 
 const canvas = document.getElementById("networkCanvas");
 const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
 
-let particles = [];
+resizeCanvas();
 
-for(let i=0;i<60;i++){
+window.addEventListener("resize", resizeCanvas);
+
+const particles = [];
+const particleCount = 65;
+
+for (let i = 0; i < particleCount; i++) {
 
     particles.push({
-        x:Math.random()*canvas.width,
-        y:Math.random()*canvas.height,
-        vx:(Math.random()-0.5)*0.4,
-        vy:(Math.random()-0.5)*0.4
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6,
+        radius: 2
     });
 
 }
 
-function animate(){
+function drawParticles() {
 
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    particles.forEach(p=>{
+    particles.forEach((particle) => {
 
-        p.x += p.vx;
-        p.y += p.vy;
+        particle.x += particle.vx;
+        particle.y += particle.vy;
 
-        if(p.x<0 || p.x>canvas.width) p.vx *= -1;
-        if(p.y<0 || p.y>canvas.height) p.vy *= -1;
+        if (
+            particle.x < 0 ||
+            particle.x > canvas.width
+        ) {
+            particle.vx *= -1;
+        }
+
+        if (
+            particle.y < 0 ||
+            particle.y > canvas.height
+        ) {
+            particle.vy *= -1;
+        }
 
         ctx.beginPath();
-        ctx.arc(p.x,p.y,2,0,Math.PI*2);
-        ctx.fillStyle = "#d4af37";
+        ctx.arc(
+            particle.x,
+            particle.y,
+            particle.radius,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle = "rgba(255,255,255,0.8)";
         ctx.fill();
 
     });
 
-    for(let a=0;a<particles.length;a++){
+    for (let i = 0; i < particles.length; i++) {
 
-        for(let b=a;b<particles.length;b++){
+        for (let j = i + 1; j < particles.length; j++) {
 
-            let dx = particles[a].x - particles[b].x;
-            let dy = particles[a].y - particles[b].y;
-            let dist = Math.sqrt(dx*dx + dy*dy);
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
 
-            if(dist < 120){
+            const distance = Math.sqrt(
+                dx * dx + dy * dy
+            );
+
+            if (distance < 140) {
 
                 ctx.beginPath();
-                ctx.moveTo(particles[a].x, particles[a].y);
-                ctx.lineTo(particles[b].x, particles[b].y);
-                ctx.strokeStyle = "rgba(212,175,55,0.15)";
+
+                ctx.moveTo(
+                    particles[i].x,
+                    particles[i].y
+                );
+
+                ctx.lineTo(
+                    particles[j].x,
+                    particles[j].y
+                );
+
+                ctx.strokeStyle =
+                    `rgba(255,255,255,${
+                        0.15 - distance / 1000
+                    })`;
+
+                ctx.lineWidth = 1;
+
                 ctx.stroke();
 
             }
+
         }
+
     }
 
-    requestAnimationFrame(animate);
+    requestAnimationFrame(drawParticles);
 }
 
-animate();
+drawParticles();
 
-window.addEventListener("resize", () => {
+/* =========================================
+   GALLERY IMAGE HOVER EFFECT
+========================================= */
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+const galleryImages = document.querySelectorAll(".gallery-item");
+
+galleryImages.forEach((item) => {
+
+    item.addEventListener("mousemove", (e) => {
+
+        const rect = item.getBoundingClientRect();
+
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateY = (x - centerX) / 25;
+        const rotateX = (centerY - y) / 25;
+
+        item.style.transform =
+            `perspective(1000px)
+             rotateX(${rotateX}deg)
+             rotateY(${rotateY}deg)
+             scale(1.03)`;
+
+    });
+
+    item.addEventListener("mouseleave", () => {
+
+        item.style.transform =
+            "perspective(1000px) rotateX(0) rotateY(0) scale(1)";
+
+    });
 
 });
+
+/* =========================================
+   FLOATING HEARTS
+========================================= */
+
+function createHeart() {
+
+    const heart = document.createElement("div");
+
+    heart.innerHTML = "❤";
+
+    heart.style.position = "fixed";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.bottom = "-30px";
+    heart.style.color = "#ffffff";
+    heart.style.opacity = "0.25";
+    heart.style.fontSize =
+        Math.random() * 15 + 10 + "px";
+    heart.style.pointerEvents = "none";
+    heart.style.zIndex = "-1";
+
+    document.body.appendChild(heart);
+
+    let position = -30;
+
+    const animation = setInterval(() => {
+
+        position += 2;
+
+        heart.style.bottom = position + "px";
+
+        if (position > window.innerHeight + 50) {
+
+            clearInterval(animation);
+            heart.remove();
+
+        }
+
+    }, 30);
+
+}
+
+setInterval(createHeart, 1800);
