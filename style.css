@@ -74,11 +74,11 @@ body{
     right:0;
 }
 
-.curtain-open .left-curtain{
+#curtainContainer.curtain-open .left-curtain{
     transform:translateX(-100%);
 }
 
-.curtain-open .right-curtain{
+#curtainContainer.curtain-open .right-curtain{
     transform:translateX(100%);
 }
 
